@@ -52,12 +52,16 @@ public class HTTPMsgService implements NotificationSender {
     private final Gson gson = new Gson();
 
     // Metrics
-    @Autowired
-    private MetricRegistry metrics;
+    private final MetricRegistry metrics;
     private Meter http;
     private Meter httpErr;
     private Meter hpom;
     private Meter hpomErr;
+
+    @Autowired
+    public HTTPMsgService(MetricRegistry metrics) {
+        this.metrics = metrics;
+    }
 
     @PostConstruct
     public void init() {
